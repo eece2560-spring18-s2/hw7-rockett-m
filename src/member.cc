@@ -27,7 +27,7 @@ void Member::PathToMemberIDDFS(uint64_t dst_member_id) {
   if connecting_members.find
   
   
-  for ( ){
+  for (  ){
     for (  ){
       for (  ){
         if (m == m2) {
