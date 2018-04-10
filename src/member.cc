@@ -48,6 +48,9 @@ void Member::PathToMemberIDDFS(uint64_t dst_member_id) {
         }
         if (connecting_members.find(m2->member_id)) != connecting_members.end()) {
           continue; //dst id is 2nd
+        if (connecting_members.find(dst->id)) != connecting_members.end()){
+          continue;
+        }
         }
       }
     }
