@@ -18,19 +18,22 @@ void Member::DumpConnections() {
 
 void Member::PathToMemberBFS(uint64_t dst_member_id) {
   // Fill in your code here.
+  
+  for ()
 }
 
 void Member::PathToMemberIDDFS(uint64_t dst_member_id) {
   // Fill in your code here
+  Member * found;
   
   
   if connecting_members.find
   
   
-  for (  ){
-    for (  ){
-      for (  ){
-        if (m == m2) {
+  for (auto g : groups){
+    for (auto m1 : g -> members){
+      for (auto m2 : g -> members){
+        if (m1 == m2) {
          continue;
         }
         if (connecting_members.find(m2->member_id)) != connecting_members.end()) {
