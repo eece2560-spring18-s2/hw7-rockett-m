@@ -19,7 +19,17 @@ void Member::DumpConnections() {
 void Member::PathToMemberBFS(uint64_t dst_member_id) {
   // Fill in your code here.
   
-  for ()
+  for (auto i = begin(members); i < end(members); i++){
+    for (auto j = std:next(i); j < end(members); j++){
+      auto m1 = * i;
+      auto m2 = * j;
+      //see if it exists
+      bool exists = not m1 -> connecting_members.emplace(m2 -> member_id, MemberConnection{&group, m2}).second;
+      if (exists)
+        continue;
+      m2 -> connecting_members.emplace(m1 -> member_id, MemberConnection{&group, m1});
+    }
+  }
 }
 
 void Member::PathToMemberIDDFS(uint64_t dst_member_id) {
