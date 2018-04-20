@@ -197,12 +197,12 @@ void Database::LoadData(const std::string &data_folder_path,
 void Database::BuildMemberGraph() {
   // Fill in your code here
   for (Group *g : groups){
-    for (Member *m1 : members){
-      for (Member *m2 : members){
+    for (Member *m1 : g->members){
+      for (Member *m2 : g->members){
         if (m1 == m2){
           continue;
         }
-        if (m1.connecting_members.find(m2->member_id) != (m1->connecting_members.end())) {
+        if (m1->connecting_members.find(m2->member_id) != (m1->connecting_members.end())) {
           continue;
         }
         MemberConnection mryconn;
