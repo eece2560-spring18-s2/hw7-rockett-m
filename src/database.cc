@@ -196,21 +196,27 @@ void Database::LoadData(const std::string &data_folder_path,
 
 void Database::BuildMemberGraph() {
   // Fill in your code here
-}
-
-double Database::BestGroupsToJoin(Member *root) {
-  // Fill in your code here
   for (Group *g : groups){
     for (Member *m1 : members){
       for (Member *m2 : members){
         if (m1 == m2){
           continue;
         }
-        if ()
+        if (m1.connecting_members.find(m2->member_id) != (m->connecting_members.end())) {
+          continue;
         }
+        MemberConnection mryconn;
+        mryconn.group = g;
+        mryconn.dst = m2;
+        m1->connecting_members[m2->member_id] = mryconn;
       }
     }
   }
+}
+
+double Database::BestGroupsToJoin(Member *root) {
+  // Fill in your code here
+  
 }
 
 }
