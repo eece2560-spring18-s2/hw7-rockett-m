@@ -202,7 +202,7 @@ void Database::BuildMemberGraph() {
         if (m1 == m2){
           continue;
         }
-        if (m1.connecting_members.find(m2->member_id) != (m->connecting_members.end())) {
+        if (m1.connecting_members.find(m2->member_id) != (m1->connecting_members.end())) {
           continue;
         }
         MemberConnection mryconn;
@@ -216,6 +216,7 @@ void Database::BuildMemberGraph() {
 
 double Database::BestGroupsToJoin(Member *root) {
   // Fill in your code here
+  double 
   
 }
 
