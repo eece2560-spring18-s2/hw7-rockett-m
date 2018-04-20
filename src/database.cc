@@ -246,10 +246,15 @@ double Database::BestGroupsToJoin(Member *root) {
     for (auto mryconn : start->connecting_members) {
       auto mryconn = mryconn.second;
       auto b = mryconn.dst;
-    }
-    }
+      if (b->color == COLOR_WHITE && mryconn.GetWeight() < b.key) {
+        b->parent = start;
+        b->key = mryconn.second.GetWeight());
+        
+        fullweight = fullweight + b->key;
+      }
     }
   }
+  return fullweight;
   
 }
 
