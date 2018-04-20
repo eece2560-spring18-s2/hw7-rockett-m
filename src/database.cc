@@ -105,7 +105,7 @@ void Database::LoadMemberData(const std::string &member_file, int limit) {
       member_id_hash_index[member->member_id] = member;
     }
   }
-  std::cout << members.size() << " merbers loaded.\n";
+  std::cout << members.size() << " members loaded.\n";
 }
 
 void Database::LoadGroupData(const std::string &group_file, int limit) {
@@ -200,6 +200,17 @@ void Database::BuildMemberGraph() {
 
 double Database::BestGroupsToJoin(Member *root) {
   // Fill in your code here
+  for (Group *g : groups){
+    for (Member *m1 : members){
+      for (Member *m2 : members){
+        if (m1 == m2){
+          continue;
+        }
+        if ()
+        }
+      }
+    }
+  }
 }
 
 }
