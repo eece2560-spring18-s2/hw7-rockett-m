@@ -216,7 +216,40 @@ void Database::BuildMemberGraph() {
 
 double Database::BestGroupsToJoin(Member *root) {
   // Fill in your code here
-  double 
+  double fullweight = 0;
+  root->key = 0;
+  std::vector<Member *> b;
+  BuildMemberGraph();
+  
+  for (Member *m1 : members) {
+    if (m1->member_id == root->member_id) {
+    } else {
+      m1->key = 99999999;
+    }
+    
+    m1->color = COLOR_WHITE;
+    m1->parent = NULL;
+    b.push_back(m1);
+  }
+  
+  while (!b.empty()) {
+    Member* min = b.front();
+    int start = 0;
+    for (uint64_t i = 0; i < b.size(); i++) {
+      if (b[i]->key < min->key) {
+        min = b[i];
+        start = i;
+      }
+    }
+    b.erase(b.begin() + start);
+    start->color=COLOR_BLACK;
+    for (auto mryconn : start->connecting_members) {
+      auto mryconn = mryconn.second;
+      auto b = mryconn.dst;
+    }
+    }
+    }
+  }
   
 }
 
