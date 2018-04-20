@@ -43,7 +43,10 @@ void Member::PathToMemberBFS(uint64_t dst_member_id) {
     }
   }
   
-  void 
+  
+  
+  
+  
   for (auto i = begin(members); i < end(members); i++){
     for (auto j = std:next(i); j < end(members); j++){
       auto m1 = * i;
@@ -59,6 +62,19 @@ void Member::PathToMemberBFS(uint64_t dst_member_id) {
 
 void Member::PathToMemberIDDFS(uint64_t dst_member_id) {
   // Fill in your code here
+  if (depth == 0 && m->member_id == dst_member_id) {
+    return m;
+  }
+  if (depth > 0) {
+    for (auto child : m->connecting_members) {
+      auto mryconn = child.second;
+      auto found = DLS(mryconn.dst, depth - 1; dst_member_id);
+      if (found != NULL) {
+        mryconn.dst->parent = m;
+        return found;
+      }
+    }
+  }
   Member * found;
   
   
