@@ -197,18 +197,18 @@ void Database::LoadData(const std::string &data_folder_path,
 void Database::BuildMemberGraph() {
   // Fill in your code here
   for (Group *g : groups){
-    for (Member *m1 : g->members){
+    for (Member *m : g->members){
       for (Member *m2 : g->members){
-        if (m1 == m2){
+        if (m == m2){
           continue;
         }
-        if (m1->connecting_members.find(m2->member_id) != (m1->connecting_members.end())) {
+        if (m->connecting_members.find(m2->member_id) != (m->connecting_members.end())) {
           continue;
         }
         MemberConnection mryconn;
         mryconn.group = g;
         mryconn.dst = m2;
-        m1->connecting_members[m2->member_id] = mryconn;
+        m->connecting_members[m2->member_id] = mryconn;
       }
     }
   }
@@ -218,30 +218,32 @@ double Database::BestGroupsToJoin(Member *root) {
   // Fill in your code here
   double fullweight = 0;
   root->key = 0;
-  std::vector<Member *> b;
+  std::vector<Member *> q;
   BuildMemberGraph();
   
-  for (Member *m1 : members) {
-    if (m1->member_id == root->member_id) {
+  for (Member *m : members) {
+    if (m->member_id == root->member_id) {
     } else {
-      m1->key = 99999999;
+      m->key = 99999999;
     }
     
-    m1->color = COLOR_WHITE;
-    m1->parent = NULL;
-    b.push_back(m1);
+    m->color = COLOR_WHITE;
+    m->parent = NULL;
+    q.push_back(m);
   }
   
-  while (!b.empty()) {
-    Member* min = b.front();
+  int start;
+  
+  while (!q.empty()) {
+    Member* min = q.front();
     int start = 0;
-    for (uint64_t i = 0; i < b.size(); i++) {
-      if (b[i]->key < min->key) {
-        min = b[i];
+    for (uint64_t i = 0; i < q.size(); i++) {
+      if (q[i]->key < min->key) {
+        min = q[i];
         start = i;
       }
     }
-    b.erase(b.begin() + start);
+    q.erase(q.begin() + start);
     start->color=COLOR_BLACK;
     for (auto mryconn : start->connecting_members) {
       auto mryconn = mryconn.second;
