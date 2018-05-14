@@ -168,10 +168,11 @@ void Database::RandomizeGraph(int num_connections) {
     Member *src = members[src_index];
     Member *dst = members[dst_index];
 
-    if (src == dst) continue;
+    if (src == dst) {
+      continue;
+    }
 
-    if (src->connecting_members.find(dst->member_id) == 
-        src->connecting_members.end()) {
+    if (src->connecting_members.find(dst->member_id) == src->connecting_members.end()) {
       MemberConnection conn;
       conn.group = groups[group_index];
       conn.dst = dst;
@@ -196,19 +197,19 @@ void Database::LoadData(const std::string &data_folder_path,
 
 void Database::BuildMemberGraph() {
   // Fill in your code here
-  for (Group *g : groups){
-    for (Member *m : g->members){
-      for (Member *m2 : g->members){
-        if (m == m2){
+  for (Group *g : groups) {
+    for (Member *m : g->members) {
+      for (Member *m2 : g->members) {
+        if (m == m2) {
           continue;
         }
         if (m->connecting_members.find(m2->member_id) != (m->connecting_members.end())) {
           continue;
         }
-        MemberConnection mryconn;
-        mryconn.group = g;
-        mryconn.dst = m2;
-        m->connecting_members[m2->member_id] = mryconn;
+        MemberConnection memory_conn;
+        memory_conn.group = g;
+        memory_conn.dst = m2;
+        m->connecting_members[m2->member_id] = memory_conn;
       }
     }
   }
@@ -223,20 +224,19 @@ double Database::BestGroupsToJoin(Member *root) {
   
   for (Member *m : members) {
     if (m->member_id == root->member_id) {
-    } else {
+    } 
+    else {
       m->key = 99999999;
     }
-    
     m->color = COLOR_WHITE;
     m->parent = NULL;
     q.push_back(m);
   }
-  
   //int start;
-  
   while (!q.empty()) {
     Member* min = q.front();
     int start = 0;
+    
     for (uint64_t i = 0; i < q.size(); i++) {
       if (q[i]->key < min->key) {
         min = q[i];
@@ -245,19 +245,17 @@ double Database::BestGroupsToJoin(Member *root) {
     }
     q.erase(q.begin() + start);
     start->color=COLOR_BLACK;
-    for (auto mryconn : start->connecting_members) {
-      auto mryconn = mryconn.second;
-      auto b = mryconn.dst;
-      if (b->color == COLOR_WHITE && mryconn.GetWeight() < b.key) {
+    for (auto memory_conn : start->connecting_members) {
+      memory_conn = memory_conn.second;
+      auto b = memory_conn.dst;
+      if (b->color == COLOR_WHITE && memory_conn.GetWeight() < b->key) { //from b.key
         b->parent = start;
-        b->key = mryconn.second.GetWeight();
-        
+        b->key = memory_conn.second.GetWeight();
         fullweight = fullweight + b->key;
       }
     }
   }
   return fullweight;
-  
 }
 
 }
