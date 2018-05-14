@@ -232,7 +232,7 @@ double Database::BestGroupsToJoin(Member *root) {
     q.push_back(m);
   }
   
-  int start;
+  //int start;
   
   while (!q.empty()) {
     Member* min = q.front();
@@ -250,7 +250,7 @@ double Database::BestGroupsToJoin(Member *root) {
       auto b = mryconn.dst;
       if (b->color == COLOR_WHITE && mryconn.GetWeight() < b.key) {
         b->parent = start;
-        b->key = mryconn.second.GetWeight());
+        b->key = mryconn.second.GetWeight();
         
         fullweight = fullweight + b->key;
       }
