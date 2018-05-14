@@ -232,30 +232,35 @@ double Database::BestGroupsToJoin(Member *root) {
     m->parent = NULL;
     q.push_back(m);
   }
+  
   //int start;
   while (!q.empty()) {
-    Member* min = q.front();
+    Member *minimum = q.front();
     int start = 0;
-    
     for (uint64_t i = 0; i < q.size(); i++) {
-      if (q[i]->key < min->key) {
-        min = q[i];
+      if (q[i]->key < minimum->key) {
+        minimum = q[i];
         start = i;
       }
     }
+    
     q.erase(q.begin() + start);
-    start->color=COLOR_BLACK;
-    for (auto memory_conn : start->connecting_members) {
-      memory_conn = memory_conn.second;
-      auto b = memory_conn.dst;
-      if (b->color == COLOR_WHITE && memory_conn.GetWeight() < b->key) { //from b.key
-        b->parent = start;
-        b->key = memory_conn.second.GetWeight();
+    minimum->color = COLOR_BLACK;
+    for (auto memory_conn : minimum->connecting_members) {
+      auto memory_conn_2 = memory_conn.second;
+      auto b = memory_conn_2.dst;
+      
+      if (b->color == COLOR_WHITE && memory_conn_2.GetWeight() < b->key) { //from b.key
+        b->parent = minimum;
+        b->key = memory_conn_2.GetWeight();
         fullweight = fullweight + b->key;
       }
+      
     }
   }
+  
   return fullweight;
+  
 }
 
 }
