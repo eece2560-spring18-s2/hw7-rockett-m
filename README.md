@@ -36,10 +36,10 @@ joins `L groups`, and each member is connected to `B other members`.
     
 Complexity: O(G*M<sup>2</sup>*L*B)  
 
-⋅⋅*for loop (G)  
-⋅⋅*for loop 2x (M*M)  
-⋅⋅*if cond (L)  
-⋅⋅*if cond (B)  
+* for loop (G)  
+* for loop 2x (M*M)  
+* if cond (L)  
+* if cond (B)  
 
 5807 events loaded  
 10000 members loaded  
