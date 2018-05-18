@@ -25,7 +25,7 @@ void Member::PathToMemberBFS(uint64_t dst_member_id) {
   qu.push(this);
   while (!qu.empty()) {
     Member *m = qu.front();
-    qu.pop;
+    qu.pop();
     for (auto iter : m->connecting_members) {
       auto c = iter.second; // connection
       auto d = c.dst; // destination
@@ -45,8 +45,6 @@ void Member::PathToMemberBFS(uint64_t dst_member_id) {
   }
 
 Member *Member::DLS(Member *node, int depth, uint64_t dst_member_id) {
-
-void Member::PathToMemberIDDFS(uint64_t dst_member_id) {
   // Fill in your code here
   if (depth == 0 && node->member_id == dst_member_id) {
     return node;
