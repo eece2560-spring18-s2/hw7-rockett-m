@@ -98,8 +98,9 @@ Maximum resident set size (kbytes): 127016
 
 IDDFS: Average Mem_cons<sub>pk</sub> = 126960 kbytes  
 
-\Delta Avg_Mem_Cons<sub>pk3-pk2</sub> = 103 kbytes
+&Delta Avg_Mem_Cons<sub>pk3-pk2</sub> = 103 kbytes
 
 With pathfinding in BFS, the peak memory consumption averaged 103 bytes more
 than the IDDFS search. 
+
 ## P4. Find best Groups to join
