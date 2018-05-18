@@ -105,7 +105,7 @@ void Database::LoadMemberData(const std::string &member_file, int limit) {
       member_id_hash_index[member->member_id] = member;
     }
   }
-  std::cout << members.size() << " merbers loaded.\n";
+  std::cout << members.size() << " members loaded.\n";
 }
 
 void Database::LoadGroupData(const std::string &group_file, int limit) {
@@ -168,10 +168,11 @@ void Database::RandomizeGraph(int num_connections) {
     Member *src = members[src_index];
     Member *dst = members[dst_index];
 
-    if (src == dst) continue;
+    if (src == dst) {
+      continue;
+    }
 
-    if (src->connecting_members.find(dst->member_id) == 
-        src->connecting_members.end()) {
+    if (src->connecting_members.find(dst->member_id) == src->connecting_members.end()) {
       MemberConnection conn;
       conn.group = groups[group_index];
       conn.dst = dst;
@@ -196,10 +197,70 @@ void Database::LoadData(const std::string &data_folder_path,
 
 void Database::BuildMemberGraph() {
   // Fill in your code here
+  for (Group *g : groups) {
+    for (Member *m : g->members) {
+      for (Member *m2 : g->members) {
+        if (m == m2) {
+          continue;
+        }
+        if (m->connecting_members.find(m2->member_id) != m->connecting_members.end()) {
+          continue;
+        }
+        MemberConnection c;
+        c.group = g;
+        c.dst = m2;
+        m->connecting_members[m2->member_id] = c;
+      }
+    }
+  }
 }
 
 double Database::BestGroupsToJoin(Member *root) {
   // Fill in your code here
+  double total = 0;
+  root->key = 0;
+  std::vector<Member *> qu;
+//  BuildMemberGraph();
+  
+  for (Member *r : members) {
+    //if (r->member_id == root->member_id) {
+    //} 
+  //  else {
+      r->key = 999999;
+ //   }
+    r->color = COLOR_WHITE;
+    r->parent = NULL;
+    qu.push_back(r);
+  }
+  root->key = 0;
+
+  //int start;
+  while (!qu.empty()) {
+    Member *minimum = qu.front();
+    int start = 0;
+    for (uint64_t i = 0; i < qu.size(); i++) {
+      if (qu[i]->key < minimum->key) {
+        minimum = qu[i];
+        start = i;
+      }
+    }
+    
+    qu.erase(qu.begin() + start);
+    minimum->color = COLOR_BLACK;
+    for (auto c : minimum->connecting_members) {
+      auto c2 = c.second;
+      auto node = c2.dst;
+      
+      if (node->color == COLOR_WHITE && c2.GetWeight() < node->key) { 
+        node->parent = minimum;
+        node->key = c2.GetWeight();
+        total = total + node->key;
+      }
+    }
+  }
+  
+  return total;
+  
 }
 
 }
