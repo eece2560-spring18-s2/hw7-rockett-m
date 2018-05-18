@@ -63,8 +63,8 @@ Member *Member::DLS(Member *node, int depth, uint64_t dst_member_id) {
 }
 
 void Member::PathToMemberIDDFS(uint64_t dst_member_id) {
-  for (int i = 0; i < std::numeric_limits<int>::max(); i++) {
-    Member *found = DLS(this, i, dst_member_id);
+  for (int depth = 0; depth < std::numeric_limits<int>::max(); depth++) {
+    Member *found = DLS(this, depth, dst_member_id);
     if (found != NULL) {
       PrintPath(found);
       return;
