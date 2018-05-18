@@ -222,15 +222,15 @@ double Database::BestGroupsToJoin(Member *root) {
   std::vector<Member *> qu;
   BuildMemberGraph();
   
-  for (Member *m : members) {
-    if (m->member_id == root->member_id) {
+  for (Member *r : members) {
+    if (r->member_id == root->member_id) {
     } 
     else {
-      m->key = 999999;
+      r->key = 999999;
     }
-    m->color = COLOR_WHITE;
-    m->parent = NULL;
-    qu.push_back(m);
+    r->color = COLOR_WHITE;
+    r->parent = NULL;
+    qu.push_back(r);
   }
   
   //int start;
