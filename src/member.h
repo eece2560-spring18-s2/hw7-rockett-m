@@ -41,12 +41,12 @@ class Member {
   std::vector<Group *> groups;
   std::unordered_map<uint64_t, MemberConnection> connecting_members;
 
-  Member *DLS(Member *node, int depth, uint64_t dst_member_id);
   void PathToMemberBFS(uint64_t dst_member_id);
   void PathToMemberIDDFS(uint64_t dst_member_id);
   void PrintPath(Member *dst);
   void DumpConnections();
-
+  Member *DLS(Member *node, int depth, uint64_t dst_member_id);
+  
   // For graph algorithms
   int color = COLOR_WHITE;
   double key; // For BST DFT, this is the depth. For MST, this is the key.
