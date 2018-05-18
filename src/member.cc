@@ -23,43 +23,55 @@ void Member::PathToMemberBFS(uint64_t dst_member_id) {
   this->parent = NULL;
   std::queue<Member*> q;
   q.push(this);
-  while(!q.empty()) {
-    Member* m = q.front();
+  while (!q.empty()) {
+    Member *m = q.front();
     q.pop;
-    for (auto conn_mem : m->connecting_members) {
-      auto mryconn = conn_mem.second;
-      auto v = mryconn = mryconn.dst;
-      if (v->member_id == dst.member_id) {
-        v->parent = m;
-        PrintPath(v);
+    for (auto iter : m->connecting_members) {
+      auto c = iter.second; // connection
+      auto d = c.dst; // destination
+      if (d->member_id == dst_member_id) {
+        d->parent = m;
+        PrintPath(d);
         return;
       }
-      if (v->color == COLOR_WHITE){
-        v->color = COLOR_GRAY;
-        v->parent = m;
-        q.push(v);
+      if (d->color == COLOR_WHITE){
+        d->color = COLOR_GRAY;
+        d->parent = m;
+        q.push(d);
       }
     }
     m->color = COLOR_BLACK;
     }
   }
-  
+
+Member *Member::DLS(Member *node, int depth, uint64_t dst_member_id) {
+
 void Member::PathToMemberIDDFS(uint64_t dst_member_id) {
   // Fill in your code here
-  if (depth == 0 && m->member_id == dst_member_id) {
-    return m;
+  if (depth == 0 && node->member_id == dst_member_id) {
+    return node;
   }
   if (depth > 0) {
-    for (auto child : m->connecting_members) {
-      auto mryconn = child.second;
-      auto found = DLS(mryconn.dst, depth - 1; dst_member_id);
+    for (auto child : node->connecting_members) {
+      auto c = child.second;
+      auto found = DLS(c.dst, depth - 1; dst_member_id);
       if (found != NULL) {
-        mryconn.dst->parent = m;
+        c.dst->parent = node;
         return found;
       }
     }
   }
   return NULL;
+}
+
+void Member::PathToMemberIDDFS(uint64_t dst_member_id) {
+  for (int i = 0; i < std::numeric_limits<int>::max(); i++) {
+    Member *found = DLS(this, i, dst_member_id);
+    if (found != NULL) {
+      PrintPath(found);
+      return;
+    }
+  }
 }
 
 void Member::PrintPath(Member* dst) {
