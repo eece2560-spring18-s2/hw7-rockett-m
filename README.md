@@ -34,12 +34,12 @@ joins `L groups`, and each member is connected to `B other members`.
       }
     }
     
-Complexity: O(G * M<sup>2</sup> * L * B)
+Complexity: O(G*M^2^*L*B)
 
-for loop - G
-for loop 2x - M
-if cond - L
-if cond - B
+⋅⋅*for loop (G)
+⋅⋅*for loop 2x (M*M)
+⋅⋅*if cond (L)
+⋅⋅*if cond (B)
 
 5807 events loaded
 10000 members loaded
@@ -49,7 +49,7 @@ Time to build member graph 1.18884 (s)
 Time to build member graph 1.19216 (s)
 Time to build member graph 1.18338 (s)
 
-Avg T<sub>bmg<sub> = 1.18817 seconds
+Avg T~BMG~ = 1.18817 seconds
 
 ## P2. Connecting to someone using Breath-first Search
 
