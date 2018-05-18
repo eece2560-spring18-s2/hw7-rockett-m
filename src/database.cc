@@ -203,13 +203,13 @@ void Database::BuildMemberGraph() {
         if (m == m2) {
           continue;
         }
-        if (m->connecting_members.find(m2->member_id) != (m->connecting_members.end())) {
+        if (m->connecting_members.find(m2->member_id) != m->connecting_members.end()) {
           continue;
         }
-        MemberConnection memory_conn;
+        MemberConnection c;
         memory_conn.group = g;
         memory_conn.dst = m2;
-        m->connecting_members[m2->member_id] = memory_conn;
+        m->connecting_members[m2->member_id] = c;
       }
     }
   }
