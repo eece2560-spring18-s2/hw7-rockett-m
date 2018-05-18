@@ -47,8 +47,9 @@ Complexity: O(G * M<sup>2</sup> * L * B)
 16330 groups loaded  
 
 Time to build member graph 1.18884 seconds  
-Time to build member graph 1.19216 seconds
+Time to build member graph 1.19216 seconds  
 Time to build member graph 1.18338 seconds  
+  
 Avg T<sub>BMG</sub> = 1.18817 seconds  
 
 ## P2. Connecting to someone using Breath-first Search
