@@ -62,6 +62,7 @@ the id of provided `dst_member_id` argument.
 `./p2_main`  
  
 Scott Heiferman <- Matthew <- terrynhanggi* <- Matt Meeker  
+
 Time to find path to member 0.0075363 seconds  
 Time to find path to member 0.0086508  seconds  
 Time to find path to member 0.00730307 seconds  
@@ -73,4 +74,32 @@ into account
 
 ## P3. Connecting to someone using IDDFS
 
+In P3, you need to complete the same task, but with the IDDFS algorithm.
+
+Benchmark the main program for p2 and p3. Report the times that each algorithm
+consumes. Also, measure the peak memory consumption of the two algorithms.
+The output field called `Maximum resident set size` is the peak memory 
+consumption you are looking for. In your report explain your finding.  
+
+
+`/usr/bin/time -v ./p2_main`  
+
+Maximum resident set size (kbytes): 127080  
+Maximum resident set size (kbytes): 127036
+Maximum resident set size (kbytes): 127072
+
+BFS: Average Mem_cons<sub>pk</sub> = 127063 kbytes  
+
+`/usr/bin/time -v ./p3_main`
+
+Maximum resident set size (kbytes): 126968  
+Maximum resident set size (kbytes): 126896
+Maximum resident set size (kbytes): 127016
+
+IDDFS: Average Mem_cons<sub>pk</sub> = 126960 kbytes  
+
+\Delta Avg_Mem_Cons<sub>pk3-pk2</sub> = 103 kbytes
+
+With pathfinding in BFS, the peak memory consumption averaged 103 bytes more
+than the IDDFS search. 
 ## P4. Find best Groups to join
