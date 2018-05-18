@@ -160,5 +160,3 @@ so this feature enables users to find select groups in a short amount of time. T
 example case featured someone joining meetups to network in small groups with
 people they know or can see the relation to other members. Prim's algorithm 
 is efficient in this case and prints the member connection path quickly.
-
-
