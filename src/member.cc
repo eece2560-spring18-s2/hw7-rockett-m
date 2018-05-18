@@ -37,7 +37,7 @@ void Member::PathToMemberBFS(uint64_t dst_member_id) {
       if (d->color == COLOR_WHITE){
         d->color = COLOR_GRAY;
         d->parent = m;
-        q.push(d);
+        qu.push(d);
       }
     }
     m->color = COLOR_BLACK;
