@@ -207,8 +207,8 @@ void Database::BuildMemberGraph() {
           continue;
         }
         MemberConnection c;
-        memory_conn.group = g;
-        memory_conn.dst = m2;
+        c.group = g;
+        c.dst = m2;
         m->connecting_members[m2->member_id] = c;
       }
     }
