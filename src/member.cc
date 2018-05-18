@@ -21,11 +21,11 @@ void Member::PathToMemberBFS(uint64_t dst_member_id) {
   // Fill in your code here.
   this->color = COLOR_GRAY;
   this->parent = NULL;
-  std::queue<Member*> q;
-  q.push(this);
-  while (!q.empty()) {
-    Member *m = q.front();
-    q.pop;
+  std::queue<Member*> qu;
+  qu.push(this);
+  while (!qu.empty()) {
+    Member *m = qu.front();
+    qu.pop;
     for (auto iter : m->connecting_members) {
       auto c = iter.second; // connection
       auto d = c.dst; // destination

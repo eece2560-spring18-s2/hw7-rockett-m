@@ -217,9 +217,9 @@ void Database::BuildMemberGraph() {
 
 double Database::BestGroupsToJoin(Member *root) {
   // Fill in your code here
-  double fullweight = 0;
+  double total = 0;
   root->key = 0;
-  std::vector<Member *> q;
+  std::vector<Member *> qu;
   BuildMemberGraph();
   
   for (Member *m : members) {
@@ -230,36 +230,35 @@ double Database::BestGroupsToJoin(Member *root) {
     }
     m->color = COLOR_WHITE;
     m->parent = NULL;
-    q.push_back(m);
+    qu.push_back(m);
   }
   
   //int start;
-  while (!q.empty()) {
-    Member *minimum = q.front();
+  while (!qu.empty()) {
+    Member *minimum = qu.front();
     int start = 0;
-    for (uint64_t i = 0; i < q.size(); i++) {
-      if (q[i]->key < minimum->key) {
-        minimum = q[i];
+    for (uint64_t i = 0; i < qu.size(); i++) {
+      if (qu[i]->key < minimum->key) {
+        minimum = qu[i];
         start = i;
       }
     }
     
-    q.erase(q.begin() + start);
+    qu.erase(qu.begin() + start);
     minimum->color = COLOR_BLACK;
-    for (auto memory_conn : minimum->connecting_members) {
-      auto memory_conn_2 = memory_conn.second;
-      auto b = memory_conn_2.dst;
+    for (auto c : minimum->connecting_members) {
+      auto c2 = c.second;
+      auto z = c2.dst;
       
-      if (b->color == COLOR_WHITE && memory_conn_2.GetWeight() < b->key) { //from b.key
-        b->parent = minimum;
-        b->key = memory_conn_2.GetWeight();
-        fullweight = fullweight + b->key;
+      if (z->color == COLOR_WHITE && c2.GetWeight() < z->key) { 
+        z->parent = minimum;
+        z->key = c2.GetWeight();
+        total = total + z->key;
       }
-      
     }
   }
   
-  return fullweight;
+  return total;
   
 }
 
