@@ -220,19 +220,20 @@ double Database::BestGroupsToJoin(Member *root) {
   double total = 0;
   root->key = 0;
   std::vector<Member *> qu;
-  BuildMemberGraph();
+//  BuildMemberGraph();
   
   for (Member *r : members) {
-    if (r->member_id == root->member_id) {
-    } 
-    else {
+    //if (r->member_id == root->member_id) {
+    //} 
+  //  else {
       r->key = 999999;
-    }
+ //   }
     r->color = COLOR_WHITE;
     r->parent = NULL;
     qu.push_back(r);
   }
-  
+  root->key = 0;
+
   //int start;
   while (!qu.empty()) {
     Member *minimum = qu.front();
@@ -251,9 +252,9 @@ double Database::BestGroupsToJoin(Member *root) {
       auto node = c2.dst;
       
       if (node->color == COLOR_WHITE && c2.GetWeight() < node->key) { 
-        node->key = c2.GetWeight();
         node->parent = minimum;
-        total += total + node->key;
+        node->key = c2.GetWeight();
+        total = total + node->key;
       }
     }
   }
