@@ -1,5 +1,7 @@
 # Homework 7: STL and Graph Algorithms
 
+In this homework, we are going to practice how to implement graph-related 
+algorithms. At the same time, we are going to practice the use of C++ STL.
 We favor the STL containers than self-implemented containers because
 i) they are very stable, ii) they are highly optimized for performance, and 
 iii) they are richer in features.
