@@ -248,12 +248,12 @@ double Database::BestGroupsToJoin(Member *root) {
     minimum->color = COLOR_BLACK;
     for (auto c : minimum->connecting_members) {
       auto c2 = c.second;
-      auto z = c2.dst;
+      auto node = c2.dst;
       
-      if (z->color == COLOR_WHITE && c2.GetWeight() < z->key) { 
-        z->parent = minimum;
-        z->key = c2.GetWeight();
-        total = total + z->key;
+      if (node->color == COLOR_WHITE && c2.GetWeight() < node->key) { 
+        node->key = c2.GetWeight();
+        node->parent = minimum;
+        total += total + node->key;
       }
     }
   }

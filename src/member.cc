@@ -24,23 +24,23 @@ void Member::PathToMemberBFS(uint64_t dst_member_id) {
   std::queue<Member*> qu;
   qu.push(this);
   while (!qu.empty()) {
-    Member *m = qu.front();
+    Member *r = qu.front();
     qu.pop();
-    for (auto iter : m->connecting_members) {
+    for (auto iter : r->connecting_members) {
       auto c = iter.second; // connection
       auto d = c.dst; // destination
       if (d->member_id == dst_member_id) {
-        d->parent = m;
+        d->parent = r;
         PrintPath(d);
         return;
       }
       if (d->color == COLOR_WHITE){
         d->color = COLOR_GRAY;
-        d->parent = m;
+        d->parent = r;
         qu.push(d);
       }
     }
-    m->color = COLOR_BLACK;
+    r->color = COLOR_BLACK;
     }
   }
 
@@ -52,7 +52,7 @@ Member *Member::DLS(Member *node, int depth, uint64_t dst_member_id) {
   if (depth > 0) {
     for (auto child : node->connecting_members) {
       auto c = child.second;
-      auto found = DLS(c.dst, depth - 1; dst_member_id;);
+      auto found = DLS(c.dst, depth - 1, dst_member_id);
       if (found != NULL) {
         c.dst->parent = node;
         return found;
