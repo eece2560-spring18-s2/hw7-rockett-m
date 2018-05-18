@@ -41,6 +41,7 @@ class Member {
   std::vector<Group *> groups;
   std::unordered_map<uint64_t, MemberConnection> connecting_members;
 
+  Member *DLS(Member *node, int depth, uint64_t dst_member_id);
   void PathToMemberBFS(uint64_t dst_member_id);
   void PathToMemberIDDFS(uint64_t dst_member_id);
   void PrintPath(Member *dst);
