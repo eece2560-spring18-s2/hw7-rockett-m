@@ -226,7 +226,7 @@ double Database::BestGroupsToJoin(Member *root) {
     if (m->member_id == root->member_id) {
     } 
     else {
-      m->key = 99999999;
+      m->key = 999999;
     }
     m->color = COLOR_WHITE;
     m->parent = NULL;

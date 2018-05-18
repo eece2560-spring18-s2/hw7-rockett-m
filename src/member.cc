@@ -52,7 +52,7 @@ Member *Member::DLS(Member *node, int depth, uint64_t dst_member_id) {
   if (depth > 0) {
     for (auto child : node->connecting_members) {
       auto c = child.second;
-      auto found = DLS(c.dst, depth - 1; dst_member_id);
+  //    auto found = DLS(c.dst, depth - 1; dst_member_id;);
       if (found != NULL) {
         c.dst->parent = node;
         return found;
@@ -74,7 +74,7 @@ void Member::PathToMemberIDDFS(uint64_t dst_member_id) {
 
 void Member::PrintPath(Member* dst) {
   Member *curr = dst;
-  while(curr && curr != this) {
+  while (curr && curr != this) {
     std::cout << curr->member_name << " <- ";
     curr = curr->parent;
   }
